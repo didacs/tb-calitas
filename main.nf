@@ -13,7 +13,6 @@ params.max_gaps_between_guide_and_pam = 0
 
 //  processes
 process get_spacers_metadata {
-    debug true
     publishDir "metadata", mode: 'copy'
 
     input:
@@ -32,6 +31,7 @@ process get_spacers_metadata {
 
 
 process prepare_ref {
+    publishDir "output", mode: 'copy'
     input:
         path fasta
         val assembly_name
