@@ -31,7 +31,6 @@ process get_spacers_metadata {
 
 
 process prepare_ref {
-    publishDir "output", mode: 'copy'
     input:
         path fasta
         val assembly_name
@@ -49,7 +48,7 @@ process prepare_ref {
 
 
 process run_calitas {
-    publishDir "output"
+    publishDir "output", mode: 'copy'
     input:
         tuple val(sp_id), val(bases)
         path fasta

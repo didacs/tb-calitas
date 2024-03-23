@@ -2,13 +2,19 @@
 
 CALITAS wrapper for Cas9 off-target prediction 
 
-**Install dependencies**\
-Clone repository
+**Install dependencies**
+- Clone repository
 ```
 git clone git@github.com:tomebio/tb-calitas.git
 cd tb-calitas
 ```
-Create conda environment
+- [Install conda][conda-link]
+- Install mamba
+
+```
+conda install -c conda-forge mamba
+```
+- Create conda environment
 ```
 mamba env create -f environment.yml
 ```
@@ -57,3 +63,5 @@ cd /path/to/analysis
 nextflow run /path/to/tb-calitas/main.nf [-c nextflow.config]
 ```
 Note: if `nextflow.config` is present in the working directory, it will be loaded automatically
+
+[conda-link]: https://docs.conda.io/projects/conda/en/latest/user-guide/install/
