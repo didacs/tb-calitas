@@ -25,33 +25,36 @@ WAREHOUSE_USERNAME="your_username"
 WAREHOUSE_PASSWORD="your_passwd"
 WAREHOUSE_URL="postgres-warehouse.tome.benchling.com"
 ```
-**Configuration**\
-The following are default parameters 
-```
-params.spacers = "${workflow.projectDir}/test/spacers.txt"
-params.pam = 'nrg'
-params.fasta = "${workflow.projectDir}/test/chr21.sample.fa"
-params.assembly_name = "chr21_sample"
-params.species = "human"
-params.variants = null
-params.max_guide_diffs = 4
-params.max_pam_mismatches = 0
-params.max_gaps_between_guide_and_pam = 0
-```
-User-defined parameters can be read from `nextflow.config`
-```
-params {
-       spacers = "./my_spacers.txt"
-       fasta = "/data/refs/GRCh38.p14/GRCh38.p14.fasta"
-       assembly_name = "GRCh38/hg38"
-       species = "human"
-}
-```
-The main input is `my_spacers.txt`, which contains the list of spacer ids (SPXXXX) from benchling, one spacer per line, no header, for example
+**Input**
+- `spacers`: .txt file containing the list of spacer ids (SPXXXX) from benchling, one spacer per line, no header
 ```
 SP2114
 SP2115
 ```
+- `fasta`: reference FASTA file, requires both index and dictionary, which can be generated using samtools
+```
+samtools faidx ref.fa
+samtools dict -a <assembly-name> -s <species> -o ref.fa.dict ref.fa
+```
+The following are default parameters 
+```
+params.spacers = "${workflow.projectDir}/test/spacers.txt"
+params.fasta = "${workflow.projectDir}/test/chr21.sample.fa"
+params.pam = 'nrg'
+params.max_guide_diffs = 4
+params.max_pam_mismatches = 0
+params.max_gaps_between_guide_and_pam = 0
+params.variants = null
+```
+User-defined parameters can be read from `nextflow.config`.\
+```
+params {
+       spacers = "my_spacers.txt"
+       fasta = "/data/refs/GRCh38.p14/GRCh38.p14.fasta"
+}
+```
+Note:`fasta` must be a full path, otherwise nextflow fails to find a relative path.
+
 **Run the pipeline**\
 Activate conda environment
 ```
