@@ -36,7 +36,12 @@ SP2115
 samtools faidx ref.fa
 samtools dict -a <assembly-name> -s <species> -o ref.fa.dict ref.fa
 ```
-The following are default parameters 
+- `gtf`: gene set annotation in GTF format. A sorted file is available here
+```
+s3://tomebfx-data/didac_notebooks/hg38/GCF_000001405.40_GRCh38.p14_genomic.gtf.UpdateGffContigNames.gtf.sorted.gtf
+```
+**Configuration**\
+The following are the default parameters 
 ```
 params.spacers = "${workflow.projectDir}/test/spacers.txt"
 params.fasta = "${workflow.projectDir}/test/chr21.sample.fa"
@@ -45,15 +50,16 @@ params.max_guide_diffs = 4
 params.max_pam_mismatches = 0
 params.max_gaps_between_guide_and_pam = 0
 params.variants = null
+params.gtf = "${workflow.projectDir}/test/chr21.sample.gtf"
 ```
-User-defined parameters can be read from `nextflow.config`.\
+User-defined parameters can be defined in `nextflow.config`.
 ```
 params {
        spacers = "my_spacers.txt"
        fasta = "/data/refs/GRCh38.p14/GRCh38.p14.fasta"
 }
 ```
-Note:`fasta` must be a full path, otherwise nextflow fails to find a relative path.
+IMPORTANT: paths must be a absolute, as nextflow fails to find relative paths.
 
 **Run the pipeline**\
 Activate conda environment

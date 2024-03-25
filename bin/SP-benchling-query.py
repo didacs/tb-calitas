@@ -37,6 +37,7 @@ load_dotenv()
 username = os.getenv('WAREHOUSE_USERNAME')
 password = os.getenv('WAREHOUSE_PASSWORD')
 url = os.getenv('WAREHOUSE_URL')
+assert username and password and url, 'WAREHOUSE credentials are missing'
 conn = psycopg2.connect(f"dbname=warehouse user={username} password={password} port=5432 host={url}")
 cur = conn.cursor()
 cur.execute(query)
